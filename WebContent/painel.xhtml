@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Speed Reader</title>
+	<h:outputStylesheet library="css" name="spray-style.css" />
+	<h:outputScript library="js" name="spray-reader.js" />
+	<h:outputScript library="js" name="core.js" />
+
+</h:head>
+
+<h:body>
+
+	<h:form styleClass="form-signin" enctype="multipart/form-data">
+		
+		<p:messages  severity="info" escape="false" showDetail="true" 
+                 autoUpdate="true" closable="true"/>
+		
+		<p:fileUpload fileUploadListener="#{read.doUpload}"
+			showButtons="false" label="Procurar..." auto="true" />
+
+		<p:growl id="messages" showDetail="true" />
+
+		<p:panel menuTitle="Speed Reader" styleClass="container">
+
+			<div class="bs-callout bs-callout-info">
+				<h4>Aooo</h4>
+				<p>Selecione a página que gostaria de iniciar e finalizar a
+					leitura.</p>
+			</div>
+			<div>
+				<p:outputLabel value="Iniciar em:" />
+				<p:inputText value="#{read.startPage}" />
+			</div>
+			<div>
+				<p:outputLabel value="Finalizar em:" />
+				<p:inputText value="#{read.endPage}" />
+			</div>
+
+			<p:commandButton value="Carregar..."
+				actionListener="#{read.carregar}" update="texto" />
+
+
+			<p:selectOneMenu styleClass="wpm">
+				<f:selectItem itemLabel="100" itemValue="100" />
+				<f:selectItem itemLabel="200" itemValue="200" />
+				<f:selectItem itemLabel="300" itemValue="300" />
+				<f:selectItem itemLabel="400" itemValue="400" />
+				<f:selectItem itemLabel="500" itemValue="500" />
+			</p:selectOneMenu>
+
+			<p:commandButton value="Iniciar Leitura"
+				styleClass="start btn btn-success" />
+			<p:commandButton value="Parar Leitura" styleClass="stop" />
+
+
+
+
+
+
+		</p:panel>
+
+		<div id="spray_container">
+			<div id="guide_top">
+				――――――――――<span id="notch">&#1092;</span>―――――――――――
+			</div>
+			<div id="spray_result"></div>
+			<div id="guide_bottom">――――――――――――――――――――――</div>
+		</div>
+
+
+		<h:outputText value="#{read.texto}" id="texto" styleClass="texto" />
+
+
+	</h:form>
+</h:body>
+</html>
